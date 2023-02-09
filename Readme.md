@@ -10,3 +10,6 @@ docker build -t streamlit-pg .
 ```python
 docker run -p 8501:8501 streamlit-pg
 ```
+
+If you have any questions, checkout official [documentation](https://docs.streamlit.io) and [community
+forums](https://discuss.streamlit.io).
