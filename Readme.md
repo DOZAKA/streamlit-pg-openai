@@ -4,11 +4,11 @@
 
 ### Build Docker Image
 ```python
-docker build -t streamlit-pg .
+$ docker build -t streamlit-pg .
 ```
 ### Run Docker Image
 ```python
-docker run -p 8501:8501 streamlit-pg
+$ docker run -p 8501:8501 streamlit-pg
 ```
 
 If you have any questions, checkout official [documentation](https://docs.streamlit.io) and [community
