@@ -2,6 +2,10 @@
 
 FROM python:3.9-slim
 
+ENV PYTHONPATH /app \
+    OPEN_AI_ORG $OPEN_AI_ORG \
+    OPEN_AI_API_KEY $OPEN_AI_API_KEY
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
@@ -19,4 +23,4 @@ EXPOSE 8501
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "streamlit_pg/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
