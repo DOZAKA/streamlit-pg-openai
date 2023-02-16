@@ -2,11 +2,11 @@
 
 FROM python:3.9-slim
 
-ENV PYTHONPATH /app \
-    OPEN_AI_ORG $OPEN_AI_ORG \
-    OPEN_AI_API_KEY $OPEN_AI_API_KEY
-
 WORKDIR /app
+
+ENV PYTHONPATH /app
+ENV OPEN_AI_ORG $OPEN_AI_ORG
+ENV OPEN_AI_API_KEY $OPEN_AI_API_KEY
 
 RUN apt-get update && apt-get install -y \
     build-essential \
