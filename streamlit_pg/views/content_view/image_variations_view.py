@@ -3,7 +3,7 @@ from . import ContentView
 from streamlit_pg.modules.openai_manager.openai_manager import OpenAIManager
 
 
-class ImgToImgContentView(ContentView):
+class ImageVariationsView(ContentView):
     def __init__(self, st: streamlit, oai_manager: OpenAIManager):
         super().__init__(st, oai_manager)
 
