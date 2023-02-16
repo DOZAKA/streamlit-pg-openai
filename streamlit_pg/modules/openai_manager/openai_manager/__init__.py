@@ -61,13 +61,13 @@ class OpenAIManager:
             print(e)
             return None
 
-    def moderation(self, content: str) -> list:
+    def moderation(self, content: str) -> dict:
         try: 
-            response = openai.Moderation.create(
+            response: dict = openai.Moderation.create(
                 input=content
             )
-
-            return response.get("results", None)
+            results: list = response.get("results", None)
+            return results.pop()
         except Exception as e:
             print(e)
             return None
