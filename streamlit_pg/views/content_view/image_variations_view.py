@@ -6,10 +6,10 @@ from streamlit_pg.modules.openai_manager.openai_manager import OpenAIManager
 class ImageVariationsView(ContentView):
     def __init__(self, st: streamlit, oai_manager: OpenAIManager):
         super().__init__(st, oai_manager)
+        self.openai_doc: str = "https://platform.openai.com/docs/guides/images/variations"
 
     def view(self) -> None:
-        openai_doc: str = "https://platform.openai.com/docs/guides/images/variations"
-        self.st.write("OpenAI API Introduction [link](%s)" % openai_doc)
+        self.st.write("OpenAI API Introduction [link](%s)" % self.openai_doc)
         self.st.header("[Request]")
         uploaded_file = self.st.file_uploader(label='Pick an image to generate image')
 
@@ -31,6 +31,3 @@ class ImageVariationsView(ContentView):
             return
 
         self.st.image(img_url)
-
-    def on_click(self) -> None:
-        pass

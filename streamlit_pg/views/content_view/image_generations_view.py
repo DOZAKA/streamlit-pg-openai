@@ -24,6 +24,3 @@ class ImageGenerationsView(ContentView):
             return
 
         self.st.image(img_url)
-
-    def on_click(self) -> None:
-        pass

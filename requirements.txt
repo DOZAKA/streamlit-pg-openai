@@ -1,4 +1,5 @@
-altair
-pandas
 streamlit
+streamlit_option_menu
 openai
+pandas
+requests
