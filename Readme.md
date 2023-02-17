@@ -8,7 +8,7 @@
 
 ### Build docker image
 ```python
-$ docker build -t streamlit-pg .  --build-arg OPEN_AI_ORG=INPUT_YOUR_ORG --build-arg OPEN_AI_API_KEY=INPUT_YOUR_KEY
+$ docker build -t streamlit-pg . --build-arg OPEN_AI_ORG=YOUR_ORG_HERE --build-arg OPEN_AI_API_KEY=YOUR_API_KEY_HERE
 ```
 ### Run docker image
 ```python
