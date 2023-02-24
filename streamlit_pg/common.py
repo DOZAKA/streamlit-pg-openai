@@ -1,3 +1,4 @@
+import requests
 from enum import Enum
 
 
@@ -15,14 +16,42 @@ class HttpRequestMethod(ExtendedEnum):
     DELETE = "DELETE"
 
 
+class HttpRequestTabs(ExtendedEnum):
+    AUTH = "Auth"
+    HEADERS = "Headers"
+    BODY = "Body"
+
+
+class AuthType(ExtendedEnum):
+    NO_AUTH = "No Auth"
+    BEARER_TOKEN = "Bearer Token"
+    BASIC_AUTH = "Basic Auth"
+
+
 class RequestApi:
-    def __init__(self, method: str, url: str, headers: dict = None, payload: dict = None):
+    def __init__(self, auth_info: tuple, method: str, url: str, headers: dict = None, payload: dict = None):
+        self.auth_info: tuple = auth_info
         self.method: str = method
         self.url: str = url
         self.headers: dict = headers
         self.payload: dict = payload
 
     def send(self) -> dict:
-        import requests
+        print(self.auth_info)
+        print(self.method)
+        print(self.url)
+        print(self.headers)
+        print(self.payload)
 
-        return requests.request(self.method, self.url, headers=self.headers, data=self.payload)
+        try:
+            response: requests.Response = requests.request(self.method, self.url, headers=self.headers, data=self.payload, auth=self.auth_info)
+            print(response.status_code)
+            print(response.text)
+
+            if response.status_code != 200:
+                return
+
+            return response.json()
+        except Exception as e:
+            print(e)
+            return None
