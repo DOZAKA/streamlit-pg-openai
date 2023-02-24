@@ -35,14 +35,13 @@ class RequestApi:
         self.url: str = url
         self.headers: dict = headers
         self.payload: dict = payload
-
-    def send(self) -> dict:
         print(self.auth_info)
         print(self.method)
         print(self.url)
         print(self.headers)
         print(self.payload)
 
+    def send(self) -> dict:
         try:
             response: requests.Response = requests.request(self.method, self.url, headers=self.headers, data=self.payload, auth=self.auth_info)
             print(response.status_code)
