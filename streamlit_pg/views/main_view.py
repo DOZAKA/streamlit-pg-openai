@@ -4,6 +4,7 @@ from .content_view.custom_api_view import CustomApiView
 from .content_view.image_generations_view import ImageGenerationsView
 from .content_view.image_variations_view import ImageVariationsView
 from .content_view.moderation_view import ModerationContentView
+from .content_view.papgo_api_view import PapagoApiView
 from streamlit_option_menu import option_menu
 from streamlit_pg.common import ExtendedEnum
 from streamlit_pg.modules.openai_manager.openai_manager import OpenAIManager
@@ -14,6 +15,7 @@ class ModelType(ExtendedEnum):
     IMAGE_GENERATIONS = "IMAGE_GENERATIONS"
     IMAGE_VARIATIONS = "IMAGE_VARIATIONS"
     TEXT_MODERATION = "TEXT_MODERATION"
+    PAPAGO_API = "PAPAGO_API"
 
 class MainView:
     def __init__(self, st: streamlit, oai_manager: OpenAIManager):
@@ -33,6 +35,8 @@ class MainView:
             self.content_view = ImageVariationsView(self.st, self.oai_manager)
         elif selected_type == ModelType.TEXT_MODERATION:
             self.content_view = ModerationContentView(self.st, self.oai_manager)
+        elif selected_type == ModelType.PAPAGO_API:
+            self.content_view = PapagoApiView(self.st)
 
         self.content_view.view()
 
