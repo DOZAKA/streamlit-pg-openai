@@ -20,8 +20,6 @@ class CustomApiView(ContentView):
         }
         self.body_info: dict = {}
 
-        self.response_area = None
-
     def view(self) -> None:
         self.st.info(self.api_description, icon="ℹ️")
         self.request_view()
@@ -47,18 +45,28 @@ class CustomApiView(ContentView):
 
         _, _, _, _, button_col = self.st.columns(5)
 
-        if button_col.button('Send Request'):
+        if button_col.button("Send Request"):
             self.send_request()
 
     def params_tab_view(self) -> None:
         tmp_param_info: dict = dict()
 
-        for key in self.param_info:
-            val: str = self.param_info.get(key)
+        default_param_cnt: int = len(self.param_info)
+        default_param_keys: list = list(self.param_info)
+        param_cnt: int = self.st.number_input("Param Count", value=default_param_cnt, max_value=20, min_value=0)
+
+        for i in range(param_cnt):
+            default_key: str = ""
+            default_val: str = ""
+
+            if default_param_keys:
+                default_key = default_param_keys.pop(0)
+                default_val = self.param_info.get(default_key)
 
             key_col, val_col = self.st.columns(2)
-            k: str = key_col.text_input("KEY", key)
-            v: str = val_col.text_input("VALUE", val)
+
+            k: str = key_col.text_input("KEY", key="PARAM_KEY" + str(i), value=default_key)
+            v: str = val_col.text_input("VALUE", key="PARAM_VALUE" + str(i), value=default_val)
 
             tmp_param_info[k] = v
 
@@ -81,12 +89,28 @@ class CustomApiView(ContentView):
         self.st.session_state["AUTH_INFO"] = auth_info
 
     def headers_tab_view(self) -> None:
-        headers_str: str = self.st.text_area("Headers", json.dumps(self.header_info))
+        tmp_header_info: dict = dict()
 
-        if headers_str:
-            self.st.session_state["HEADERS"] = eval(headers_str)
-        else:
-            self.st.session_state["HEADERS"] = None
+        default_header_cnt: int = len(self.header_info)
+        default_header_keys: list = list(self.header_info)
+        header_cnt: int = self.st.number_input("Header Count", value=default_header_cnt, max_value=20, min_value=0)
+
+        for i in range(header_cnt):
+            default_key: str = ""
+            default_val: str = ""
+
+            if default_header_keys:
+                default_key = default_header_keys.pop(0)
+                default_val = self.header_info.get(default_key)
+
+            key_col, val_col = self.st.columns(2)
+
+            k: str = key_col.text_input("KEY", key="HEADER_KEY" + str(i), value=default_key)
+            v: str = val_col.text_input("VALUE", key="HEADER_VALUE" + str(i), value=default_val)
+
+            tmp_header_info[k] = v
+
+        self.st.session_state["HEADERS"] = tmp_header_info
 
     def body_tab_view(self) -> None:
         body: str = self.st.text_area("Body", json.dumps(self.body_info))
